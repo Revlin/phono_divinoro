@@ -37,10 +37,10 @@ void setup() {
   frate = 15;
   div1000 = (1000/frate);
   buffer_size = 256;
-  img_buffer_size = 92;
+  img_buffer_size = 32;
   img_loaded = 1;
   smp_range = 0;
-  trigger_thresh = 92;
+  trigger_thresh = 72;
   frameRate(frate*2);
   background(0, 0, 0);
   

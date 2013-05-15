@@ -1,24 +1,3 @@
-// This class is a very simple implementation of AudioListener. By implementing this interface, 
-// you can add instances of this class to any class in Minim that implements Recordable and receive
-// buffers of samples in a callback fashion. In other words, every time that a Recordable object has 
-// a new buffer of samples, it will send a copy to all of its AudioListeners. You can add an instance of 
-// an AudioListener to a Recordable by using the addListener method of the Recordable. If you want to 
-// remove a listener that you previously added, you call the removeListener method of Recordable, passing 
-// the listener you want to remove.
-//
-// Although possible, it is not advised that you add the same listener to more than one Recordable. 
-// Your listener will be called any time any of the Recordables you've added it have new samples. This 
-// means that the stream of samples the listener sees will likely be interleaved buffers of samples from 
-// all of the Recordables it is listening to, which is probably not what you want.
-//
-// You'll notice that the three methods of this class are synchronized. This is because the samples methods 
-// will be called from a different thread than the one instances of this class will be created in. That thread 
-// might try to send samples to an instance of this class while the instance is in the middle of drawing the 
-// waveform, which would result in a waveform made up of samples from two different buffers. Synchronizing 
-// all the methods means that while the main thread of execution is inside draw, the thread that calls 
-// samples will block until draw is complete. Likewise, a call to draw will block if the sample thread is inside 
-// one of the samples methods. Hope that's not too confusing!
-
 class Waveline implements AudioListener
 {
   private float[] left;
@@ -174,7 +153,9 @@ class Waveline implements AudioListener
             short x1 = (short)(i * 8);
             short x2 = (short)((i + 1) * 8);
             vscreen.noFill();
-            vscreen.stroke(random(i*(r/32)),random(i*(g/32)),random(i*(b/32)));
+            color pal = color(random(i*(r/32)),random(i*(g/32)),random(i*(b/32)));
+            if(modeB == 2) vscreen.fill(pal, 27);
+            vscreen.stroke(pal);
             draw_shape(x1, y1 + left[x1]*(wavew), x2, y1 + left[x2]*(wavew));
             if (modeB == 0)
               draw_shape(x1, y1 - right[x1]*(wavew), x2, y1 - right[x2]*(wavew));
@@ -183,7 +164,7 @@ class Waveline implements AudioListener
         
           case 1:
           tint(255, 239);
-          if(clr_scrn == true) vscreen.image(img[img_i],0,0);
+          //if(clr_scrn == true) vscreen.image(img[img_i],0,0);
           // draw the input waveforms
           y1 = (short)(waveh/2);
           for(byte i = 0; i < (wavew/16);i++)
@@ -192,6 +173,7 @@ class Waveline implements AudioListener
             short x2 = (short)((i + 1) * 8);
             vscreen.noFill();
             color pix = img[img_i].get(x1, (int)(y1 + left[x1]*(wavew_2)));
+            if(modeB == 2) vscreen.fill(pix, 27);
             vscreen.stroke(pix);
             draw_shape(x1, y1 + left[x1]*(wavew), x2, y1 + left[x2]*(wavew));
             if (modeB == 0) {
@@ -221,7 +203,9 @@ class Waveline implements AudioListener
           {
             short x1 = (short)(i * 8);
             short x2 = (short)((i + 1) * 8);
-            vscreen.stroke(random(i*(r/32)),random(i*(g/32)),random(i*(b/32)));
+            color pal = color(random(i*(r/32)),random(i*(g/32)),random(i*(b/32)));
+            if(modeB == 2) vscreen.fill(pal, 27);
+            vscreen.stroke(pal);
             draw_shape(x1, y1 + left[x1]*(wavew), x2, y1 + left[x2]*(wavew));
             if (modeB == 0)
               draw_shape(x1, y1 - left[x1]*(wavew), x2, y1 - left[x2]*(wavew));
@@ -230,13 +214,14 @@ class Waveline implements AudioListener
         
           case 1:
           tint(255, 239);
-          if(clr_scrn == true) vscreen.image(img[img_i],0,0);
+          //if(clr_scrn == true) vscreen.image(img[img_i],0,0);
           // draw the input waveforms
           for(byte i = 0; i < (wavew/16);i++)
           {
             short x1 = (short)(i * 8);
             short x2 = (short)((i + 1) * 8);
             color pix = img[img_i].get(x1, (int)(y1 + left[x1]*(wavew_2)));
+            if(modeB == 2) vscreen.fill(pix, 27);
             vscreen.stroke(pix);
             draw_shape(x1, y1 + left[x1]*(wavew), x2, y1 + left[x2]*(wavew));
             if(modeB == 0) {
@@ -258,9 +243,15 @@ class Waveline implements AudioListener
   public void draw_shape(short ax, float ay, short bx, float by) {
     int mode = (int)modeB;
     switch (mode) {
-      case 0: vscreen.line(ax*2, ay, bx*2, by); break;
-      case 1: vscreen.rect(ax, ay-(by/2), bx, by); break;
-      case 2: vscreen.ellipse(ax*2, ay, bx, by); break;
+      case 0:
+      vscreen.line(ax*2, ay*1.5, bx*2, by*1.5); 
+      break;
+      case 1:
+      vscreen.rect(ax, ay*2-(by/2), bx, by); 
+      break;
+      case 2:
+      vscreen.ellipse(ax*2, ay*2, bx, by); 
+      break;
     }
   }
   
