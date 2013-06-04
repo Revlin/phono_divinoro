@@ -26,7 +26,7 @@ S			- ellipse mode
 
 A			- switch between color and image-mode
 
-V			- reset the screen
+V			- reset (clear) the screen
 
 R			- take screenshot (saved to 'data/rec')
 

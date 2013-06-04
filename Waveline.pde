@@ -164,7 +164,7 @@ class Waveline implements AudioListener
         
           case 1:
           tint(255, 239);
-          //if(clr_scrn == true) vscreen.image(img[img_i],0,0);
+          if(clr_scrn == true) vscreen.image(img[img_i],0,0);
           // draw the input waveforms
           y1 = (short)(waveh/2);
           for(byte i = 0; i < (wavew/16);i++)

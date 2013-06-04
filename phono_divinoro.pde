@@ -37,7 +37,7 @@ void setup() {
   frate = 15;
   div1000 = (1000/frate);
   buffer_size = 256;
-  img_buffer_size = 32;
+  img_buffer_size = 92;
   img_loaded = 1;
   smp_range = 0;
   trigger_thresh = 72;
@@ -228,6 +228,11 @@ void draw() {
     
     if(!mousePressed) {
       play_img(trigger_thresh);
+      if ((key == 'v')||(key == 'V')||(key == '0')) {
+        clear = true;
+      } else {
+        clear = false;
+      }
     } 
     
     if (null != acanvas) { 
@@ -243,7 +248,7 @@ void draw() {
       popMatrix();
       image(acanvas, 0, acanvas.height/2);
       tint(255, 207); 
-      image(bcanvas, -1, -7, width+1, height+12);
+      image(bcanvas, -3, -7, width+6, height+12);
       noTint();
       this.loadPixels();
       bcanvas.loadPixels();
@@ -278,6 +283,7 @@ void draw() {
       short vg = (short)map(mouseY*2-height, 0, height, 255, 32);
       short vb = (short)map(width-mouseX*2, 0, width, 255, 32);
       input_sketcher.change_clr(vr, vg, vb);
+      clear = true;
       break;
       case 1:
       short img_num = (short)map(width-mouseX, 0, width, img_buffer_size, 0);
@@ -388,7 +394,7 @@ void play_img(int pb_dec) {
       input_sketcher.change_img(play_i);
     }
     play_i++;
-    clear = true;
+    //clear = true;
   }
   
   fill(0);
