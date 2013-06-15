@@ -37,7 +37,7 @@ void setup() {
   frate = 15;
   div1000 = (1000/frate);
   buffer_size = 256;
-  img_buffer_size = 92;
+  img_buffer_size = 16;
   img_loaded = 1;
   smp_range = 0;
   trigger_thresh = 72;
@@ -82,16 +82,20 @@ void getImages(String folder_name) {
     if (folder != null) {
       File[] listOfFiles = folder.listFiles();
 
-      for (int i = 0, id = 0; (i < 1000); i++) {
+      for (int i = 0, id = 0; (i < 100); i++) {
         if (listOfFiles[i].isFile()) {
           String file_num = listOfFiles[i].getName().substring(
                                 listOfFiles[i].getName().length() - 6);
           //println(file_num);
-          id = -1 + ((Character.getNumericValue(file_num.charAt(0))*10)+Character.getNumericValue(file_num.charAt(1)));
+          //println(id);
+          //id = -1 + ((Character.getNumericValue(file_num.charAt(0))*10)+Character.getNumericValue(file_num.charAt(1)));
+          //println(id);
           String temp_ext = listOfFiles[i].getName().substring(
                                 listOfFiles[i].getName().length() - 4);
-          if ( (temp_ext.equals(".jpg") || temp_ext.equals(".png")) && (id < img_buffer_size) && (id > 0)) {       
+          if ( (temp_ext.equals(".JPG") || temp_ext.equals(".jpg") || temp_ext.equals(".png")) && (id < img_buffer_size) /*&& (id > 0)*/ ) {       
             images[id] = dataPath(folder_name)+"/"+listOfFiles[i].getName();
+            println(id);
+            println(images[id]);
             img_loaded += 1;
             id += 1;
           }
@@ -100,108 +104,41 @@ void getImages(String folder_name) {
         }
       }
     }
-  } catch (Exception e) {}
+  } catch (Exception e) {
   
-  //Back up pics
-  int id = 0;
-  String[] lista = { "img/fire01.jpg", 
-                      "img/fire02.jpg", 
-                      "img/fire03.jpg",  
-                      "img/fire04.jpg",
-                      "img/fire05.jpg", 
-                      "img/fire06.jpg",  
-                      "img/fire07.jpg", 
-                      "img/fire08.jpg", 
-                      "img/fire09.jpg",  
-                      "img/fire10.jpg",  
-                      "img/fire11.jpg", 
-                      "img/fire12.jpg", 
-                      "img/fire13.jpg", 
-                      "img/fire14.jpg",
-                      "img/fire15.jpg", 
-                      "img/fire16.jpg", 
-                      "img/fire17.jpg", 
-                      "img/fire18.jpg",
-                      "img/fire19.jpg", 
-                      "img/fire20.jpg", 
-                      "img/fire21.jpg",  
-                      "img/fire22.jpg", 
-                      "img/fire23.jpg",  
-                      "img/fire24.jpg",
-                      "img/fire25.jpg", 
-                      "img/fire26.jpg",  
-                      "img/fire27.jpg", 
-                      "img/fire28.jpg", 
-                      "img/fire29.jpg",  
-                      "img/fire30.jpg",  
-                      "img/fire31.jpg", 
-                      "img/fire32.jpg", 
-                      "img/fire33.jpg", 
-                      "img/fire34.jpg",
-                      "img/fire35.jpg", 
-                      "img/fire36.jpg", 
-                      "img/fire37.jpg", 
-                      "img/fire38.jpg",
-                      "img/fire39.jpg", 
-                      "img/fire40.jpg", 
-                      "img/fire41.jpg", 
-                      "img/fire42.jpg", 
-                      "img/fire43.jpg",   
-                      "img/fire44.jpg",
-                      "img/fire45.jpg", 
-                      "img/fire46.jpg",  
-                      "img/fire47.jpg", 
-                      "img/fire48.jpg", 
-                      "img/fire49.jpg",  
-                      "img/fire50.jpg",  
-                      "img/fire51.jpg", 
-                      "img/fire52.jpg", 
-                      "img/fire53.jpg", 
-                      "img/fire54.jpg",
-                      "img/fire55.jpg", 
-                      "img/fire56.jpg", 
-                      "img/fire57.jpg", 
-                      "img/fire58.jpg",
-                      "img/fire59.jpg", 
-                      "img/fire60.jpg", 
-                      "img/fire61.jpg", 
-                      "img/fire62.jpg", 
-                      "img/fire63.jpg",   
-                      "img/fire64.jpg",
-                      "img/fire65.jpg", 
-                      "img/fire66.jpg", 
-                      "img/fire67.jpg", 
-                      "img/fire68.jpg",
-                      "img/fire69.jpg", 
-                      "img/fire70.jpg", 
-                      "img/fire71.jpg", 
-                      "img/fire72.jpg", 
-                      "img/fire73.jpg",   
-                      "img/fire74.jpg",
-                      "img/fire75.jpg", 
-                      "img/fire76.jpg",  
-                      "img/fire77.jpg", 
-                      "img/fire78.jpg", 
-                      "img/fire79.jpg",  
-                      "img/fire80.jpg",  
-                      "img/fire81.jpg", 
-                      "img/fire82.jpg", 
-                      "img/fire83.jpg", 
-                      "img/fire84.jpg",
-                      "img/fire85.jpg", 
-                      "img/fire86.jpg", 
-                      "img/fire87.jpg", 
-                      "img/fire88.jpg",
-                      "img/fire89.jpg", 
-                      "img/fire90.jpg", 
-                      "img/fire91.jpg", 
-                      "img/fire92.jpg" };
-  for (final String name : lista){
-    if ((images[id] == null) && (id < img_buffer_size)) {
-      images[id] = name;
-      img_loaded += 1;
-      id += 1;
-    }  
+    //Back up pics
+    int id = 0;
+    String[] lista = { "img/IMG_0192.JPG", 
+                      "img/IMG_0193.JPG", 
+                      "img/IMG_0194.JPG",  
+                      "img/IMG_0195.JPG",
+                      "img/IMG_0196.JPG", 
+                      "img/IMG_0197.JPG",  
+                      "img/IMG_0198.JPG", 
+                      "img/IMG_0202.JPG", 
+                      "img/IMG_0203.JPG",  
+                      "img/IMG_0204.JPG",  
+                      "img/IMG_0205.JPG", 
+                      "img/IMG_0206.JPG", 
+                      "img/IMG_0207.JPG", 
+                      "img/IMG_0210.JPG",
+                      "img/IMG_0216.JPG", 
+                      "img/IMG_0217.JPG", 
+                      "img/IMG_0218.JPG", 
+                      "img/IMG_0220.JPG",
+                      "img/IMG_0227.JPG", 
+                      "img/IMG_0228.JPG", 
+                      "img/IMG_0229.JPG",  
+                      "img/IMG_0248.JPG" };
+    for (final String name : lista){
+      //println (id);
+      if (!  (id < img_buffer_size) ) break;
+      if ( (id < img_buffer_size)  && (images[id] == null)) {
+        images[id] = name;
+        img_loaded += 1;
+        id += 1;
+      }  
+    }
   }
 
   if (img_loaded >= img_buffer_size) {
@@ -228,7 +165,9 @@ void draw() {
     
     if(!mousePressed) {
       play_img(trigger_thresh);
-      if ((key == 'v')||(key == 'V')||(key == '0')) {
+      if ( (key == 'c')||(key == 'C')||(key == '0') ) {
+        clear = true;
+      } else if ( (key == 'v')||(key == 'V') ) {
         clear = true;
       } else {
         clear = false;
@@ -324,11 +263,11 @@ void keyPressed() {
 
 void keyReleased()
 {
-  //if ( (key == 'r')||(key == 'R') ) 
-  //{
-  //  rec_name = "phono" + str(year() + month() + day() + hour() + minute());
-  //  saveFrame("data/rec/"+rec_name+"####.jpg");
-  //}
+  if ( (key == 'r')||(key == 'R') ) 
+  {
+    rec_name = "phono" + str(year() + month() + day() + hour() + minute());
+    saveFrame("data/rec/"+rec_name+"####.jpg");
+  }
   
   if ( ((key == 'a')||(key == 'A')||(key == ENTER)) && (img_loaded >= img_buffer_size)) {
     byte chk_mode = input_sketcher.get_mode();
