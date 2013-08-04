@@ -209,7 +209,7 @@ void draw() {
     } 
     
     if (keypush != char(0)) {
-      text(keypush, 0, height - 8);
+      //text(keypush, 0, height - 8);
     }
     clear = false;
   }
@@ -336,10 +336,10 @@ void play_img(int pb_dec) {
     //clear = true;
   }
   
-  fill(0);
-  rect(width - 32, height - 24, 32, 32);
-  fill(255);
-  text(smp_range, width - 32, height - 8); 
+  //fill(0);
+  //rect(width - 32, height - 24, 32, 32);
+  //fill(255);
+  //text(smp_range, width - 32, height - 8); 
 }
 
 void playMode(String mode) {
