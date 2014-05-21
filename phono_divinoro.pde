@@ -37,7 +37,7 @@ void setup() {
   frate = 15;
   div1000 = (1000/frate);
   buffer_size = 256;
-  img_buffer_size = 96;
+  img_buffer_size = 127;
   img_loaded = 1;
   smp_range = 0;
   trigger_thresh = 72;
@@ -82,18 +82,18 @@ void getImages(String folder_name) {
     if (folder != null) {
       File[] listOfFiles = folder.listFiles();
 
-      for (int i=(listOfFiles.length - 1), id=0, z=(listOfFiles.length - 1); (i > 0); i--) {
+      for (int i=(listOfFiles.length - 1), id=0, z=listOfFiles.length; (i > 0); i--) {
         if (listOfFiles[i].isFile()) {
-          println( listOfFiles[i].getName() );
+          //println( listOfFiles[i].getName() );
           String file_num = listOfFiles[i].getName().substring(
                                 listOfFiles[i].getName().length() - 7);
-          println(file_num);
+          //println(file_num);
           //println(id);
           id = z - ((Character.getNumericValue(file_num.charAt(0))*100)+(Character.getNumericValue(file_num.charAt(1))*10)+Character.getNumericValue(file_num.charAt(2)));
-          println(id);
+          //println(id);
           String temp_ext = listOfFiles[i].getName().substring(
                                 listOfFiles[i].getName().length() - 4);
-          if ( (temp_ext.equals(".JPG") || temp_ext.equals(".jpg") || temp_ext.equals(".png")) && (id < img_buffer_size) && (id > 0) ) {       
+          if ( (temp_ext.equals(".JPG") || temp_ext.equals(".jpg") || temp_ext.equals(".png")) && (id < img_buffer_size) && (id > -1) ) {       
             images[id] = dataPath(folder_name)+"/"+listOfFiles[i].getName();
             println(id);
             println(images[id]);
