@@ -128,15 +128,7 @@ void getImages(String folder_name) {
                       "img/IMG_0207.JPG",
                       "img/IMG_0208.JPG",
                       "img/IMG_0209.JPG", 
-                      "img/IMG_0210.JPG",
-                      "img/IMG_0216.JPG", 
-                      "img/IMG_0217.JPG", 
-                      "img/IMG_0218.JPG", 
-                      "img/IMG_0220.JPG",
-                      "img/IMG_0227.JPG", 
-                      "img/IMG_0228.JPG", 
-                      "img/IMG_0229.JPG",  
-                      "img/IMG_0248.JPG" };
+                      "img/IMG_0210.JPG" };
     for (final String name : lista){
       //println (id);
       if (!  (id < img_buffer_size) ) break;
