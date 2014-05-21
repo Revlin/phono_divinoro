@@ -37,7 +37,7 @@ void setup() {
   frate = 15;
   div1000 = (1000/frate);
   buffer_size = 256;
-  img_buffer_size = 16;
+  img_buffer_size = 99;
   img_loaded = 1;
   smp_range = 0;
   trigger_thresh = 72;
@@ -84,11 +84,12 @@ void getImages(String folder_name) {
 
       for (int i = 0, id = 0; (i < 100); i++) {
         if (listOfFiles[i].isFile()) {
+          println( listOfFiles[i].getName() );
           String file_num = listOfFiles[i].getName().substring(
-                                listOfFiles[i].getName().length() - 6);
-          //println(file_num);
+                                listOfFiles[i].getName().length() - 7);
+          println(file_num);
           //println(id);
-          //id = -1 + ((Character.getNumericValue(file_num.charAt(0))*10)+Character.getNumericValue(file_num.charAt(1)));
+          id = -1 + ((Character.getNumericValue(file_num.charAt(0))*10)+Character.getNumericValue(file_num.charAt(1)));
           //println(id);
           String temp_ext = listOfFiles[i].getName().substring(
                                 listOfFiles[i].getName().length() - 4);
@@ -105,8 +106,9 @@ void getImages(String folder_name) {
       }
     }
   } catch (Exception e) {
-  
-    //Back up pics
+    e.printStackTrace();
+    
+    /* Back up pics
     int id = 0;
     String[] lista = { "img/IMG_0192.JPG", 
                       "img/IMG_0193.JPG", 
@@ -139,6 +141,7 @@ void getImages(String folder_name) {
         id += 1;
       }  
     }
+    */
   }
 
   if (img_loaded >= img_buffer_size) {
